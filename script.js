@@ -15,15 +15,16 @@ console.log(formValues);
 
 // This funciton verifies that the password length is between 8 and 128.
 // TODO: Need to tie this to an actual button. Then add actual error messaging on-screen.
+// Here's an example: https://www.w3schools.com/jsref/met_element_addeventlistener.asp
 
-// function validateLengthInput() {
-//   if (pwLength >= 8 && pwLength <= 128) {
-//     alert("You've entered the right password length!");
-//   }
-//   else {
-//     alert("Password length must be between 8 and 128.")
-//   }
-// }
+function validateLengthInput() {
+  if (pwLength.value >= 8 && pwLength.value <= 128) {
+    alert("You've entered the right password length!");
+  }
+  else {
+    alert("Password length must be between 8 and 128.")
+  }
+}
 
 // validateLengthInput();
 
@@ -62,4 +63,7 @@ function writePassword() {
 
 // Add event listener to generate button
 // When the "Generate Password" button (generateBtn) is clicked, the writePassword() function will be called.
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", () => {
+  validateLengthInput();
+  writePassword();
+});
