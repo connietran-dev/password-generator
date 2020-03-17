@@ -13,13 +13,14 @@ formValues.inclUpperCase = document.getElementById("inclUpperCase").value;
 console.log(formValues);
 
 
-// This funciton verifies that the password length is between 8 and 128.
+
+// This function verifies that the password length is between 8 and 128.
 // TODO: Need to tie this to an actual button. Then add actual error messaging on-screen.
 // Here's an example: https://www.w3schools.com/jsref/met_element_addeventlistener.asp
 
 function validateLengthInput() {
   if (pwLength.value >= 8 && pwLength.value <= 128) {
-    alert("You've entered the right password length!");
+    generatePassword();
   }
   else {
     alert("Password length must be between 8 and 128.")
@@ -29,13 +30,12 @@ function validateLengthInput() {
 // validateLengthInput();
 
 
+
 function generatePassword() {
-  if (inclSymbols === "yesSymbols") {
+  if (inclSymbols.value === "yesSymbols") {
     console.log("Yay symbols");
   }
 }
-
-generatePassword();
 
 
 
