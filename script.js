@@ -2,8 +2,7 @@
 var formValues = {};
 
 // If a checkbox is unchecked when its form is submitted, there is no value submitted to the server to represent its unchecked state (e.g. value=unchecked); the value is not submitted to the server at all.
-// However, if it is checked when a form is submitted, the data name/value pair will be submitted - subscribe=newsletter.
-
+// However, if it is checked when a form is submitted, the data name/value pair will be submitted - inclSymbols=yesSymbols
 
 formValues.pwLength = document.getElementById("pwLength").value;
 formValues.inclSymbols = document.getElementById("inclSymbols").value;
@@ -13,7 +12,29 @@ formValues.inclUpperCase = document.getElementById("inclUpperCase").value;
 
 console.log(formValues);
 
-// form.lastName = document.getElementById('lastName').value;
+
+// This funciton verifies that the password length is between 8 and 128.
+// TODO: Need to tie this to an actual button. Then add actual error messaging on-screen.
+
+// function validateLengthInput() {
+//   if (pwLength >= 8 && pwLength <= 128) {
+//     alert("You've entered the right password length!");
+//   }
+//   else {
+//     alert("Password length must be between 8 and 128.")
+//   }
+// }
+
+// validateLengthInput();
+
+
+function generatePassword() {
+  if (inclSymbols === "yesSymbols") {
+    console.log("Yay symbols");
+  }
+}
+
+generatePassword();
 
 
 
