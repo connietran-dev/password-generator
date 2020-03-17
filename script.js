@@ -4,14 +4,17 @@ var formValues = {};
 // If a checkbox is unchecked when its form is submitted, there is no value submitted to the server to represent its unchecked state (e.g. value=unchecked); the value is not submitted to the server at all.
 // However, if it is checked when a form is submitted, the data name/value pair will be submitted - inclSymbols=yesSymbols
 
+function getFormValues () {
+
 formValues.pwLength = document.getElementById("pwLength").value;
-formValues.inclSymbols = document.getElementById("inclSymbols").value;
-formValues.inclNumbers = document.getElementById("inclNumbers").value;
-formValues.inclLowerCase = document.getElementById("inclLowerCase").value;
-formValues.inclUpperCase = document.getElementById("inclUpperCase").value;
+formValues.inclSymbols = document.getElementById("inclSymbols").checked;
+formValues.inclNumbers = document.getElementById("inclNumbers").checked;
+formValues.inclLowerCase = document.getElementById("inclLowerCase").checked;
+formValues.inclUpperCase = document.getElementById("inclUpperCase").checked;
 
 console.log(formValues);
 
+};
 
 
 // This function verifies that the password length is between 8 and 128.
@@ -65,5 +68,6 @@ function writePassword() {
 // When the "Generate Password" button (generateBtn) is clicked, the writePassword() function will be called.
 generateBtn.addEventListener("click", () => {
   validateLengthInput();
+  getFormValues();
   writePassword();
 });
