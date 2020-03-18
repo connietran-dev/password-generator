@@ -1,4 +1,5 @@
 // Create an empty object to store the form values.
+// TODO: This variable might not be needed.
 var formValues = {};
 
 
@@ -35,10 +36,29 @@ function validateLengthInput() {
 
 // Declare variables for what is considered symbols, numbers, lower case characters, and upper case characters.
 
-var pwSymbols = ["!", "@", "#", "$", "%", "^", "&", "*", "?"];
+var pwSymbols = ["!", "@", "#", "$", "%", "^", "&", "*", "?", "="];
 var pwNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 var pwLowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var pwUpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+
+// TODO: To generate a password, add a lower case character, then symbol, then upper case, then number. And use for loop to repeat and until you get the length of the password selected by the user (pwLength.value).
+
+
+
+// Function for selecting a Symbol from the pwSymbol array.
+
+function selectSymbol() {
+
+  // Select a random number between 0 and 9 to determine the index from the symbol array.
+  var symbolIndex = Math.floor(Math.random()*10);
+  console.log("symbolIndex is: " + symbolIndex);
+
+  // Take symbolIndex number and select the item from the pwSymbols array.
+  var selectedSymbol = pwSymbols[symbolIndex];
+  console.log("Selected symbol: " + selectedSymbol);
+  return selectedSymbol;
+}
 
 
 
@@ -52,7 +72,13 @@ function generatePassword() {
   if (inclSymbols.checked === true) {
 
     // Then include Symbols in password
-    console.log(pwSymbols);
+    // by selecting a Math.random Symbol from the array = this has become the selectSymbol() function;
+
+    selectSymbol();
+
+    //  - then concatenating (+) it for the password
+    // Do this as many times as the password length (for loop)
+
 
     // And log below message so you know it worked.
     console.log("Symbols included");
@@ -78,17 +104,18 @@ function generatePassword() {
     console.log("Lower case characters included");
   }
 
-    // If user selected to include Lower Case Characters
-    if (inclUpperCase.checked === true) {
+  // If user selected to include Lower Case Characters
+  if (inclUpperCase.checked === true) {
 
-      // Then include Numbers in password
-      console.log(pwUpperCase);
-  
-      // And log below message so you know it worked.
-      console.log("Upper case characters included");
-    }
+    // Then include Numbers in password
+    console.log(pwUpperCase);
+
+    // And log below message so you know it worked.
+    console.log("Upper case characters included");
+  }
 
 }
+
 
 
 
