@@ -9,6 +9,7 @@ var formValues = {};
 function getFormValues () {
 
 formValues.pwLength = document.getElementById("pwLength").value;
+
 formValues.inclSymbols = document.getElementById("inclSymbols").checked;
 formValues.inclNumbers = document.getElementById("inclNumbers").checked;
 formValues.inclLowerCase = document.getElementById("inclLowerCase").checked;
@@ -34,7 +35,7 @@ function validateLengthInput() {
 }
 
 
-// Declare variables for what is considered symbols, numbers, lower case characters, and upper case characters.
+// Declare variables for what are considered symbols, numbers, lower case characters, and upper case characters.
 
 var pwSymbols = ["!", "@", "#", "$", "%", "^", "&", "*", "?", "="];
 var pwNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
@@ -42,7 +43,7 @@ var pwLowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "
 var pwUpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 
-// TODO: To generate a password, add a lower case character, then symbol, then upper case, then number. And use for loop to repeat and until you get the length of the password selected by the user (pwLength.value).
+
 
 
 
@@ -56,9 +57,42 @@ function selectSymbol() {
 
   // Take symbolIndex number and select the item from the pwSymbols array.
   var selectedSymbol = pwSymbols[symbolIndex];
-  console.log("Selected symbol: " + selectedSymbol);
+  console.log("Selected symbol from array: " + selectedSymbol);
   return selectedSymbol;
+
 }
+
+
+
+// Function for selecting a Number from the pwNumbers array.
+
+function selectNumber() {
+
+  // Select a random number between 0 and 9 to determine the index from the number array.
+  var numberIndex = Math.floor(Math.random()*10);
+  console.log("numberIndex is: " + numberIndex);
+
+  // Take numberIndex number and select the item from the pwNumbers array.
+  var selectedNumber = pwNumbers[numberIndex];
+  console.log("Selected number from array: " + selectedNumber);
+  return selectedNumber;
+
+}
+
+
+
+// TODO: To create a password - 
+// First, generate a password generatePassword()by checking what the user selected in the form.
+// TODO: Consider renaming generatePassword() function to checkForm();
+// If they chose symbols (inclSymbols = true), then select a symbol from the array - selectSymbol();
+// Then, use the selectedSymbol and start adding it to the newPassword.
+// add a lower case character, then symbol, then upper case, then number. And use for loop to repeat and until you get the length of the password selected by the user (pwLength.value).
+
+// function createPassword () {
+//   var newPassword = selectedSymbol;
+//   console.log("The new password is: " + newPassword);
+//   return newPassword;
+// }
 
 
 
@@ -79,7 +113,6 @@ function generatePassword() {
     //  - then concatenating (+) it for the password
     // Do this as many times as the password length (for loop)
 
-
     // And log below message so you know it worked.
     console.log("Symbols included");
   }
@@ -87,8 +120,7 @@ function generatePassword() {
   // If user selected to include Numbers
   if (inclNumbers.checked === true) {
 
-    // Then include Numbers in password
-    console.log(pwNumbers);
+    selectNumber();
 
     // And log below message so you know it worked.
     console.log("Numbers included");
@@ -136,13 +168,16 @@ function writePassword() {
   // Returns the <textarea> when "Your Secure Password" and stores it in the variable 'passwordText'.
   var passwordText = document.querySelector("#password");
 
-  // Takes 'password' that is generated from generatePassword() and stores it as the value for 'passwordText'
+  // Takes 'password' that is generated from generatePassword() and stores it as the value for 'passwordText' which is used above to display what was variable 'password' for the <textarea>
+
+  // TODO: Determine if the order of these statements matter. I would rather switch them so that it's more human-readable with the logic, but it throws errors.
   passwordText.value = password;
 
 }
 
 // Add event listener to generate button
 // When the "Generate Password" button (generateBtn) is clicked, the writePassword() function will be called.
+// The writePassword() function calls generatePassword()which checks what the user has selected. Then selects from the arrays.
 generateBtn.addEventListener("click", () => {
 
   // TODO: Need to stop form (preventDefault()?) from submitting if conditions not met.
@@ -151,5 +186,8 @@ generateBtn.addEventListener("click", () => {
 
   // TODO: Does getformValues() needs to be here?
   getFormValues();
+
+  // createPassword();
+
   writePassword();
 });
