@@ -3,9 +3,6 @@
 var formValues = {};
 
 
-// If a checkbox is unchecked when its form is submitted, there is no value submitted to the server to represent its unchecked state (e.g. value=unchecked); the value is not submitted to the server at all.
-// However, if it is checked when a form is submitted, the data name/value pair will be submitted - inclSymbols=yesSymbols
-
 function getFormValues () {
 
 formValues.pwLength = document.getElementById("pwLength").value;
@@ -26,6 +23,12 @@ console.log(formValues);
 
 function validateLengthInput() {
   if (pwLength.value >= 8 && pwLength.value <= 128) {
+
+    for (var i = 0; i < 4; i++) {
+      generatePassword();
+    }
+    
+    console.log(pwLength.value);
     return true;
   }
   else {
@@ -57,23 +60,18 @@ function selectSymbol() {
   // Take symbolIndex number and select the item from the pwSymbols array.
   var selectedSymbol = pwSymbols[symbolIndex];
   console.log("Selected symbol from array: " + selectedSymbol);
-  // return selectedSymbol;
+  return selectedSymbol;
 
 }
-
-
-
 
 
 // Function for selecting a Number from the pwNumbers array.
 
 function selectNumber() {
 
-  // Select a random number between 0 and 9 to determine the index from the number array.
   var numberIndex = Math.floor(Math.random()*10);
   console.log("numberIndex is: " + numberIndex);
 
-  // Take numberIndex number and select the item from the pwNumbers array.
   var selectedNumber = pwNumbers[numberIndex];
   console.log("Selected number from array: " + selectedNumber);
   return selectedNumber;
@@ -84,11 +82,9 @@ function selectNumber() {
 
 function selectLowerCase() {
 
-  // Select a random number between 0 and 9 to determine the index from the number array.
   var lowerCaseIndex = Math.floor((Math.random()*26));
   console.log("lowerCaseIndex is: " + lowerCaseIndex);
 
-  // Take Index and select the item from the array.
   var selectedLowerCase = pwLowerCase[lowerCaseIndex];
   console.log("Selected lower case character from array: " + selectedLowerCase);
   return selectedLowerCase;
@@ -99,17 +95,14 @@ function selectLowerCase() {
 
 function selectUpperCase() {
 
-  // Select a random number between 0 and 9 to determine the index from the number array.
   var upperCaseIndex = Math.floor((Math.random()*26));
   console.log("upperCaseIndex is: " + upperCaseIndex);
 
-  // Take Index and select the item from the array.
   var selectedUpperCase = pwUpperCase[upperCaseIndex];
   console.log("Selected upper case character from array: " + selectedUpperCase);
   return selectedUpperCase;
 
 }
-
 
 
 
@@ -122,14 +115,14 @@ function selectUpperCase() {
 // add a lower case character, then symbol, then upper case, then number. And use for loop to repeat and until you get the length of the password selected by the user (pwLength.value).
 
 
-var newPassword = '';
-
 
 
 
 // Function for generating a password
-// TODO: Use Math.random to select an index out of each array to use in the password.
 // TODO: However, need to figure out how to generate it for password length desired.
+
+
+var newPassword = '';
 
 function generatePassword() {
 
@@ -137,47 +130,42 @@ function generatePassword() {
   if (inclSymbols.checked === true) {
 
     // Then include Symbols in password
-    // by selecting a Math.random Symbol from the array = this has become the selectSymbol() function;
+    //  - then concatenating (+) it for the password
 
     newPassword += selectSymbol();
 
-    //  - then concatenating (+) it for the password
+
     // Do this as many times as the password length (for loop)
 
     // And log below message so you know it worked.
     console.log("Symbols included");
   }
 
-  // If user selected to include Numbers
   if (inclNumbers.checked === true) {
 
     newPassword += selectNumber();
 
-    // And log below message so you know it worked.
     console.log("Numbers included");
   }
 
-  // If user selected to include Lower Case Characters
   if (inclLowerCase.checked === true) {
 
     newPassword += selectLowerCase();
 
-    // And log below message so you know it worked.
     console.log("Lower case characters included");
   }
 
-  // If user selected to include Lower Case Characters
   if (inclUpperCase.checked === true) {
 
     newPassword += selectUpperCase();
 
-    // And log below message so you know it worked.
     console.log("Upper case characters included");
   }
 
   console.log(newPassword);
 
 }
+
 
 
 
@@ -210,12 +198,12 @@ function writePassword() {
 // The writePassword() function calls generatePassword()which checks what the user has selected. Then selects from the arrays.
 generateBtn.addEventListener("click", () => {
 
+  // TODO: Does getformValues() needs to be here?
+  getFormValues();
+
   // TODO: Need to stop form (preventDefault()?) from submitting if conditions not met.
   // Or if statement
   validateLengthInput();
-
-  // TODO: Does getformValues() needs to be here?
-  getFormValues();
 
   writePassword();
 });
