@@ -46,7 +46,6 @@ var pwUpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "
 
 
 
-
 // Function for selecting a Symbol from the pwSymbol array.
 
 function selectSymbol() {
@@ -79,6 +78,23 @@ function selectNumber() {
 
 }
 
+// Function for selecting a Lower Case Character from the array.
+
+function selectLowerCase() {
+
+  // Select a random number between 0 and 9 to determine the index from the number array.
+  var lowerCaseIndex = Math.floor((Math.random()*26));
+  console.log("lowerCaseIndex is: " + lowerCaseIndex);
+
+  // Take Index and select the item from the array.
+  var selectedLowerCase = pwLowerCase[lowerCaseIndex];
+  console.log("Selected lower case character from array: " + selectedLowerCase);
+  return selectedLowerCase;
+
+}
+
+
+
 
 
 // TODO: To create a password - 
@@ -108,7 +124,7 @@ function generatePassword() {
     // Then include Symbols in password
     // by selecting a Math.random Symbol from the array = this has become the selectSymbol() function;
 
-    selectSymbol();
+    var selectedSymbol = selectSymbol();
 
     //  - then concatenating (+) it for the password
     // Do this as many times as the password length (for loop)
@@ -129,8 +145,7 @@ function generatePassword() {
   // If user selected to include Lower Case Characters
   if (inclLowerCase.checked === true) {
 
-    // Then include Numbers in password
-    console.log(pwLowerCase);
+    selectLowerCase();
 
     // And log below message so you know it worked.
     console.log("Lower case characters included");
