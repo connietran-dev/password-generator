@@ -12,7 +12,7 @@
 // CAPTURE FORM VALUES FOR VALIDATION
 
 // Create an empty object to store the form values.
-// TODO: This variable might not be needed.
+// TODO: Form values are used for debugging only.
 var formValues = {};
 
 function getFormValues () {
@@ -29,76 +29,34 @@ console.log(formValues);
 };
 
 
-// DECLARE ARRAYS FOR SYMBOLS, NUMBERS, CHARACTERS
-
-// Declare variables for what are considered symbols, numbers, lower case characters, and upper case characters.
-
-var pwSymbols = ["!", "@", "#", "$", "%", "^", "&", "*", "?", "="];
-var pwNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-var pwLowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var pwUpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 
 
-// FUNCTIONS FOR SELECTING RANDOM CHARACTER
+// ADD EVENT LISTENER TO GENERATE PASSWORD BUTTON
 
-// Function for selecting a Symbol from the pwSymbol array.
+// Assignment Code
+// "Generate Password" button HTML element is returned and stored in generateBtn variable.
+var generateBtn = document.querySelector("#generate");
 
-function selectSymbol() {
+// When the "Generate Password" button (generateBtn) is clicked {
+// The newPassword is set to an empty string and the password counter pwCounter is set to 0.
+// Then following functions are executed.
+// generatePassword() is not listed. It is called when validateLengthInput() is called.
+generateBtn.addEventListener("click", () => {
 
-  // Select a random number between 0 and 9 to determine the index from the symbol array.
-  var symbolIndex = Math.floor(Math.random()*10);
-  console.log("symbolIndex is: " + symbolIndex);
+  newPassword = "";
+  pwCounter = 0;
 
-  // Take symbolIndex number and select the item from the pwSymbols array.
-  var selectedSymbol = pwSymbols[symbolIndex];
-  console.log("Selected symbol from array: " + selectedSymbol);
-  return selectedSymbol;
+  // For debugging only.
+  getFormValues();
 
-}
+  // TODO: Need to stop form (preventDefault()?) from submitting if conditions not met.
+  // Or if statement
+  validateLengthInput();
 
-// Function for selecting a Number from the pwNumbers array.
-
-function selectNumber() {
-
-  var numberIndex = Math.floor(Math.random()*10);
-  console.log("numberIndex is: " + numberIndex);
-
-  var selectedNumber = pwNumbers[numberIndex];
-  console.log("Selected number from array: " + selectedNumber);
-  return selectedNumber;
-
-}
-
-// Function for selecting a Lower Case Character from the array.
-
-function selectLowerCase() {
-
-  var lowerCaseIndex = Math.floor((Math.random()*26));
-  console.log("lowerCaseIndex is: " + lowerCaseIndex);
-
-  var selectedLowerCase = pwLowerCase[lowerCaseIndex];
-  console.log("Selected lower case character from array: " + selectedLowerCase);
-  return selectedLowerCase;
-
-}
-
-// Function for selecting a Upper Case Character from the array.
-
-function selectUpperCase() {
-
-  var upperCaseIndex = Math.floor((Math.random()*26));
-  console.log("upperCaseIndex is: " + upperCaseIndex);
-
-  var selectedUpperCase = pwUpperCase[upperCaseIndex];
-  console.log("Selected upper case character from array: " + selectedUpperCase);
-  return selectedUpperCase;
-
-}
-
-
-
-// ON "GENERATE PASSWORD" BUTTON CLICK EVENT
+  writePassword();
+  
+});
 
 
 
@@ -122,39 +80,12 @@ function writePassword() {
 
 }
 
-// ADD EVENT LISTENER TO GENERATE PASSWORD BUTTON
 
 
-// Assignment Code
-// document.querySelector() returns the first Element within the document that matches the specified selector. 
-// In this case, "Generate Password" button is returned and stored in generateBtn variable.
-var generateBtn = document.querySelector("#generate");
+// IF VALID, GENERATE PASSWORD
 
-// When the "Generate Password" button (generateBtn) is clicked {
-// The following functions are executed.
-// The writePassword() function calls generatePassword()which checks what the user has selected. Then selects from the arrays.
-generateBtn.addEventListener("click", () => {
-
-  newPassword = '';
-  pwCounter = 0;
-
-  // TODO: Does getformValues() needs to be here?
-  getFormValues();
-
-  // TODO: Need to stop form (preventDefault()?) from submitting if conditions not met.
-  // Or if statement
-  validateLengthInput();
-
-  writePassword();
-  
-});
-
-
-
-
-// This function verifies that the password length is between 8 and 128.
-// TODO: Add actual error messaging on-screen.
-// Here's an example: https://www.w3schools.com/jsref/met_element_addeventlistener.asp
+// Verifies that the password length is between 8 and 128.
+// If yes, generate the password.
 
 function validateLengthInput() {
   if (pwLength.value >= 8 && pwLength.value <= 128) {
@@ -167,7 +98,11 @@ function validateLengthInput() {
     return true;
   }
   else {
-    alert("Password length must be between 8 and 128.")
+    alert("Password length must be between 8 and 128.");
+
+    // TODO: Add actual error messaging on-screen with innerHTML or textContent
+    // TODO: Use if to prevent generatePassword() if checkboxes are not checked.
+
     return false;
   }
 }
@@ -253,6 +188,76 @@ function generatePassword() {
   console.log(newPassword);
   console.log("The password length is: " + newPassword.length);
 
+
+}
+
+
+
+
+// DECLARE ARRAYS FOR SYMBOLS, NUMBERS, CHARACTERS
+
+// Declare variables for what are considered symbols, numbers, lower case characters, and upper case characters.
+
+var pwSymbols = ["!", "@", "#", "$", "%", "^", "&", "*", "?", "="];
+var pwNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+var pwLowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var pwUpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+
+
+// FUNCTIONS FOR SELECTING RANDOM CHARACTER
+
+// Function for selecting a Symbol from the pwSymbol array.
+
+function selectSymbol() {
+
+  // Select a random number between 0 and 9 to determine the index from the symbol array.
+  var symbolIndex = Math.floor(Math.random()*10);
+  console.log("symbolIndex is: " + symbolIndex);
+
+  // Take symbolIndex number and select the item from the pwSymbols array.
+  var selectedSymbol = pwSymbols[symbolIndex];
+  console.log("Selected symbol from array: " + selectedSymbol);
+  return selectedSymbol;
+
+}
+
+// Function for selecting a Number from the pwNumbers array.
+
+function selectNumber() {
+
+  var numberIndex = Math.floor(Math.random()*10);
+  console.log("numberIndex is: " + numberIndex);
+
+  var selectedNumber = pwNumbers[numberIndex];
+  console.log("Selected number from array: " + selectedNumber);
+  return selectedNumber;
+
+}
+
+// Function for selecting a Lower Case Character from the array.
+
+function selectLowerCase() {
+
+  var lowerCaseIndex = Math.floor((Math.random()*26));
+  console.log("lowerCaseIndex is: " + lowerCaseIndex);
+
+  var selectedLowerCase = pwLowerCase[lowerCaseIndex];
+  console.log("Selected lower case character from array: " + selectedLowerCase);
+  return selectedLowerCase;
+
+}
+
+// Function for selecting a Upper Case Character from the array.
+
+function selectUpperCase() {
+
+  var upperCaseIndex = Math.floor((Math.random()*26));
+  console.log("upperCaseIndex is: " + upperCaseIndex);
+
+  var selectedUpperCase = pwUpperCase[upperCaseIndex];
+  console.log("Selected upper case character from array: " + selectedUpperCase);
+  return selectedUpperCase;
 
 }
 
