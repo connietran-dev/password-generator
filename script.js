@@ -1,11 +1,19 @@
+// APPLICATION FUNCTION
+
+// TODO: To create a password - 
+// First, generate a password generatePassword()by checking what the user selected in the form.
+// TODO: Consider renaming generatePassword() function to checkForm();
+// If they chose symbols (inclSymbols = true), then select a symbol from the array - selectSymbol();
+// Then, use the selectedSymbol and start adding it to the newPassword.
+// add a lower case character, then symbol, then upper case, then number. And use for loop to repeat and until you get the length of the password selected by the user (pwLength.value).
+
+
+
+// CAPTURE FORM VALUES FOR VALIDATION
+
 // Create an empty object to store the form values.
 // TODO: This variable might not be needed.
 var formValues = {};
-
-
-// Variable to count length of password.
-var pwCounter = 0;
-
 
 function getFormValues () {
 
@@ -21,26 +29,7 @@ console.log(formValues);
 };
 
 
-// This function verifies that the password length is between 8 and 128.
-// TODO: Add actual error messaging on-screen.
-// Here's an example: https://www.w3schools.com/jsref/met_element_addeventlistener.asp
-
-function validateLengthInput() {
-  if (pwLength.value >= 8 && pwLength.value <= 128) {
-
-    for (var i = 0; i < pwLength.value; i++) {
-      generatePassword();
-    }
-    
-    console.log("Password length is: " + pwLength.value);
-    return true;
-  }
-  else {
-    alert("Password length must be between 8 and 128.")
-    return false;
-  }
-}
-
+// DECLARE ARRAYS FOR SYMBOLS, NUMBERS, CHARACTERS
 
 // Declare variables for what are considered symbols, numbers, lower case characters, and upper case characters.
 
@@ -51,7 +40,7 @@ var pwUpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "
 
 
 
-
+// FUNCTIONS FOR SELECTING RANDOM CHARACTER
 
 // Function for selecting a Symbol from the pwSymbol array.
 
@@ -109,14 +98,79 @@ function selectUpperCase() {
 
 
 
+// ON "GENERATE PASSWORD" BUTTON CLICK EVENT
 
-// TODO: To create a password - 
-// First, generate a password generatePassword()by checking what the user selected in the form.
-// TODO: Consider renaming generatePassword() function to checkForm();
-// If they chose symbols (inclSymbols = true), then select a symbol from the array - selectSymbol();
-// Then, use the selectedSymbol and start adding it to the newPassword.
-// add a lower case character, then symbol, then upper case, then number. And use for loop to repeat and until you get the length of the password selected by the user (pwLength.value).
 
+
+// FUNCTION TO DISPLAY PASSWORD ON SCREEN
+
+// Write password to the #password input
+function writePassword() {
+  
+  // generatePassword() function does not yet exist.
+  // Once it does exist, it will generate a password and store it in the 'password' variable.
+  var password = generatePassword();
+
+  // document.querySelector returns the <textarea> with the placeholder text "Your Secure Password" and stores it in the variable 'passwordText'.
+  // passwordText is used to display the newPassword.
+  var passwordText = document.querySelector("#password");
+
+  // Takes 'password' that is generated from generatePassword() which is newPassword - and stores it as the value for the <textarea> stored in passwordText.
+  // This displays the password.
+  // TODO: Determine if the order of these statements matter. I would rather switch them so that it's more human-readable with the logic, but it throws errors. ---- Order matters since the variable passwordText needs to be used.
+  passwordText.value = newPassword;
+
+}
+
+// ADD EVENT LISTENER TO GENERATE PASSWORD BUTTON
+
+
+// Assignment Code
+// document.querySelector() returns the first Element within the document that matches the specified selector. 
+// In this case, "Generate Password" button is returned and stored in generateBtn variable.
+var generateBtn = document.querySelector("#generate");
+
+// When the "Generate Password" button (generateBtn) is clicked {
+// The following functions are executed.
+// The writePassword() function calls generatePassword()which checks what the user has selected. Then selects from the arrays.
+generateBtn.addEventListener("click", () => {
+
+  newPassword = '';
+  pwCounter = 0;
+
+  // TODO: Does getformValues() needs to be here?
+  getFormValues();
+
+  // TODO: Need to stop form (preventDefault()?) from submitting if conditions not met.
+  // Or if statement
+  validateLengthInput();
+
+  writePassword();
+  
+});
+
+
+
+
+// This function verifies that the password length is between 8 and 128.
+// TODO: Add actual error messaging on-screen.
+// Here's an example: https://www.w3schools.com/jsref/met_element_addeventlistener.asp
+
+function validateLengthInput() {
+  if (pwLength.value >= 8 && pwLength.value <= 128) {
+
+    for (var i = 0; i < pwLength.value; i++) {
+      generatePassword();
+    }
+    
+    console.log("Password length is: " + pwLength.value);
+    return true;
+  }
+  else {
+    alert("Password length must be between 8 and 128.")
+    return false;
+  }
+}
 
 
 
@@ -126,6 +180,11 @@ function selectUpperCase() {
 
 
 var newPassword = '';
+
+
+// Variable to count length of password.
+var pwCounter = 0;
+
 
 function generatePassword() {
 
@@ -199,45 +258,3 @@ function generatePassword() {
 
 
 
-
-
-// Assignment Code
-// document.querySelector() returns the first Element within the document that matches the specified selector. 
-// In this case, "Generate Password" button is returned and stored in generateBtn variable.
-var generateBtn = document.querySelector("#generate");
-
-
-// Write password to the #password input
-function writePassword() {
-  
-  // generatePassword() function does not yet exist.
-  // Once it does exist, it will generate a password and store it in the 'password' variable.
-  var password = generatePassword();
-
-  // Returns the <textarea> when "Your Secure Password" and stores it in the variable 'passwordText'.
-  var passwordText = document.querySelector("#password");
-
-  // Takes 'password' that is generated from generatePassword() and stores it as the value for 'passwordText' which is used above to display what was variable 'password' for the <textarea>
-
-  // TODO: Determine if the order of these statements matter. I would rather switch them so that it's more human-readable with the logic, but it throws errors.
-  passwordText.value = newPassword;
-
-}
-
-// Add event listener to generate button
-// When the "Generate Password" button (generateBtn) is clicked, the writePassword() function will be called.
-// The writePassword() function calls generatePassword()which checks what the user has selected. Then selects from the arrays.
-generateBtn.addEventListener("click", () => {
-
-  newPassword = '';
-  pwCounter = 0;
-
-  // TODO: Does getformValues() needs to be here?
-  getFormValues();
-
-  // TODO: Need to stop form (preventDefault()?) from submitting if conditions not met.
-  // Or if statement
-  validateLengthInput();
-
-  writePassword();
-});
