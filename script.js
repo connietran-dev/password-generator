@@ -3,6 +3,10 @@
 var formValues = {};
 
 
+// Variable to count length of password.
+var pwCounter = 0;
+
+
 function getFormValues () {
 
 formValues.pwLength = document.getElementById("pwLength").value;
@@ -24,11 +28,11 @@ console.log(formValues);
 function validateLengthInput() {
   if (pwLength.value >= 8 && pwLength.value <= 128) {
 
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < pwLength.value; i++) {
       generatePassword();
     }
     
-    console.log(pwLength.value);
+    console.log("Password length is: " + pwLength.value);
     return true;
   }
   else {
@@ -63,7 +67,6 @@ function selectSymbol() {
   return selectedSymbol;
 
 }
-
 
 // Function for selecting a Number from the pwNumbers array.
 
@@ -127,42 +130,70 @@ var newPassword = '';
 function generatePassword() {
 
   // If user selected to include Symbols
-  if (inclSymbols.checked === true) {
+  // This will add one symbol +1 * loop
+  if (inclSymbols.checked === true && pwCounter != pwLength.value) {
 
     // Then include Symbols in password
     //  - then concatenating (+) it for the password
 
     newPassword += selectSymbol();
 
-
     // Do this as many times as the password length (for loop)
 
     // And log below message so you know it worked.
     console.log("Symbols included");
+
+    pwCounter++;
+
+    console.log(pwCounter);
   }
 
-  if (inclNumbers.checked === true) {
+  if (inclNumbers.checked === true && pwCounter != pwLength.value) {
 
     newPassword += selectNumber();
 
     console.log("Numbers included");
+
+    pwCounter++;
+
+    console.log(pwCounter);
+
+
   }
 
-  if (inclLowerCase.checked === true) {
+  if (inclLowerCase.checked === true && pwCounter != pwLength.value) {
 
     newPassword += selectLowerCase();
 
     console.log("Lower case characters included");
+
+    pwCounter++;
+
+    console.log(pwCounter);
+
   }
 
-  if (inclUpperCase.checked === true) {
+  if (inclUpperCase.checked === true && pwCounter != pwLength.value) {
 
     newPassword += selectUpperCase();
 
     console.log("Upper case characters included");
+
+    pwCounter++;
+
+    console.log(pwCounter);
+
   }
 
+  if (pwCounter === pwLength.value) {
+    console.log("Password generated.")
+  }
+
+
+
   console.log(newPassword);
+  console.log("The password length is: " + newPassword.length);
+
 
 }
 
@@ -189,7 +220,7 @@ function writePassword() {
   // Takes 'password' that is generated from generatePassword() and stores it as the value for 'passwordText' which is used above to display what was variable 'password' for the <textarea>
 
   // TODO: Determine if the order of these statements matter. I would rather switch them so that it's more human-readable with the logic, but it throws errors.
-  passwordText.value = password;
+  passwordText.value = newPassword;
 
 }
 
@@ -197,6 +228,9 @@ function writePassword() {
 // When the "Generate Password" button (generateBtn) is clicked, the writePassword() function will be called.
 // The writePassword() function calls generatePassword()which checks what the user has selected. Then selects from the arrays.
 generateBtn.addEventListener("click", () => {
+
+  newPassword = '';
+  pwCounter = 0;
 
   // TODO: Does getformValues() needs to be here?
   getFormValues();
