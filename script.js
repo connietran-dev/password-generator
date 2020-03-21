@@ -1,11 +1,10 @@
 // APPLICATION FUNCTION
 
-// TODO: To create a password - 
-// First, generate a password generatePassword()by checking what the user selected in the form.
-// TODO: Consider renaming generatePassword() function to checkForm();
+// To create a password - 
+// First, check what the user selected in the form.
 // If they chose symbols (inclSymbols = true), then select a symbol from the array - selectSymbol();
 // Then, use the selectedSymbol and start adding it to the newPassword.
-// add a lower case character, then symbol, then upper case, then number. And use for loop to repeat and until you get the length of the password selected by the user (pwLength.value).
+// add a symbol, number, lower, then upper case. And use for loop to repeat and until you get the length of the password selected by the user (pwLength.value).
 
 
 
@@ -27,7 +26,6 @@ formValues.inclUpperCase = document.getElementById("inclUpperCase").checked;
 console.log(formValues);
 
 };
-
 
 
 
@@ -82,7 +80,7 @@ function writePassword() {
 
 
 
-// IF VALID, GENERATE PASSWORD
+// VALIDATE FORM - THEN GENERATE PASSWORD
 
 // Verifies that the password length is between 8 and 128.
 // If yes, generate the password.
@@ -92,6 +90,8 @@ var forLoopCount = 0;
 function validateLengthInput() {
 
   if (pwLength.value >= 8 && pwLength.value <= 128) {
+
+    // Call generatePassword() and choose X number of characters - X is number of checkboxes.
 
     for (var i = 0; i < pwLength.value; i++) {
       generatePassword();
@@ -103,7 +103,6 @@ function validateLengthInput() {
     return true;
 
   }
-
   else {
     alert("Password length must be between 8 and 128.");
 
@@ -111,7 +110,7 @@ function validateLengthInput() {
     // TODO: Use if to prevent generatePassword() if checkboxes are not checked.
 
     return false;
-    
+
   }
 }
 
@@ -119,6 +118,8 @@ function validateLengthInput() {
 
 
 // FUNCTION TO GENERATE PASSWORD
+
+// Arrays of symbols and characters are below generatePassword() function.
 
 var newPassword = "";
 
@@ -139,7 +140,7 @@ function generatePassword() {
     console.log("Symbols included");
 
     pwCounter++;
-    console.log(pwCounter);
+    console.log("Password length counter: " + pwCounter);
   }
 
   if (inclNumbers.checked === true && pwCounter != pwLength.value) {
@@ -149,8 +150,7 @@ function generatePassword() {
     console.log("Numbers included");
 
     pwCounter++;
-
-    console.log(pwCounter);
+    console.log("Password counter: " + pwCounter);
 
   }
 
@@ -161,8 +161,7 @@ function generatePassword() {
     console.log("Lower case characters included");
 
     pwCounter++;
-
-    console.log(pwCounter);
+    console.log("Password counter: " + pwCounter);
 
   }
 
@@ -173,18 +172,16 @@ function generatePassword() {
     console.log("Upper case characters included");
 
     pwCounter++;
+    console.log("Password counter: " + pwCounter);
 
-    console.log(pwCounter);
-
-  }
-
-  if (pwCounter === pwLength.value) {
-    console.log("Password generated.")
   }
 
   console.log(newPassword);
   console.log("The current password length is: " + newPassword.length);
 
+  if (pwCounter === pwLength.value) {
+    console.log("Password generated.")
+  }
 
 }
 
@@ -203,6 +200,8 @@ var pwUpperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "
 
 
 // FUNCTIONS FOR SELECTING RANDOM CHARACTER
+
+// TODO: Simplify variables inside functions - do not need to be unique as they are local to their scope.
 
 // Function for selecting a Symbol from the pwSymbol array.
 
