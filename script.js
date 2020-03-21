@@ -87,16 +87,23 @@ function writePassword() {
 // Verifies that the password length is between 8 and 128.
 // If yes, generate the password.
 
+var forLoopCount = 0;
+
 function validateLengthInput() {
+
   if (pwLength.value >= 8 && pwLength.value <= 128) {
 
     for (var i = 0; i < pwLength.value; i++) {
       generatePassword();
+      forLoopCount++;
+      console.log("Password loop count is: " + forLoopCount);
     }
     
-    console.log("Password length is: " + pwLength.value);
+    console.log("Final password length is: " + pwLength.value);
     return true;
+
   }
+
   else {
     alert("Password length must be between 8 and 128.");
 
@@ -104,41 +111,34 @@ function validateLengthInput() {
     // TODO: Use if to prevent generatePassword() if checkboxes are not checked.
 
     return false;
+    
   }
 }
 
 
 
 
-// Function for generating a password
-// TODO: However, need to figure out how to generate it for password length desired.
+// FUNCTION TO GENERATE PASSWORD
 
+var newPassword = "";
 
-var newPassword = '';
-
-
-// Variable to count length of password.
+// Variable to count length of password for debugging.
 var pwCounter = 0;
-
 
 function generatePassword() {
 
-  // If user selected to include Symbols
-  // This will add one symbol +1 * loop
-  if (inclSymbols.checked === true && pwCounter != pwLength.value) {
+  // If user selected to include Symbols and pwCounter is not equal to user's password length
+  // Then select random symbol and add symbol to newPassword
+  // And log below message for debugging.
+  // Repeat for numbers and characters
 
-    // Then include Symbols in password
-    //  - then concatenating (+) it for the password
+  if (inclSymbols.checked === true && pwCounter != pwLength.value) {
 
     newPassword += selectSymbol();
 
-    // Do this as many times as the password length (for loop)
-
-    // And log below message so you know it worked.
     console.log("Symbols included");
 
     pwCounter++;
-
     console.log(pwCounter);
   }
 
@@ -151,7 +151,6 @@ function generatePassword() {
     pwCounter++;
 
     console.log(pwCounter);
-
 
   }
 
@@ -183,10 +182,8 @@ function generatePassword() {
     console.log("Password generated.")
   }
 
-
-
   console.log(newPassword);
-  console.log("The password length is: " + newPassword.length);
+  console.log("The current password length is: " + newPassword.length);
 
 
 }
