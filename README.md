@@ -2,8 +2,9 @@
 
 This Javascript browser application generates a random password based on user-selected criteria.
 
+The webpage will prompt you for your desired password length and then ask for your password criteria - whether to include symbols, numbers, lowercase characters, and/or uppercase characters.
+
 The live page can be found here: https://connietran-dev.github.io/password-generator/ 
-The webpage will prompt you for you desired password length and then ask for your password criteria - lowercase, uppercase, numberic and/or special characters 
 
 ---
 
@@ -27,7 +28,3 @@ THEN a password is generated that matches the selected criteria
 WHEN the password is generated
 THEN the password is either displayed in an alert or written to the page
 ```
-
-The following image demonstrates the application functionality:
-
-![password generator demo](./Assets/03-javascript-homework-demo.png)
