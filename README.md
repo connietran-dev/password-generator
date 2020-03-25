@@ -4,6 +4,10 @@ This Javascript browser application generates a random password based on user-se
 
 The webpage will prompt you for your desired password length and then ask for your password criteria - whether to include symbols, numbers, lowercase characters, and/or uppercase characters.
 
+If time permits, a future improvement would be a refactor of the code. I'd like to add the user's desired characters (symbols, numbers, etc.) to a larger array and use Math.random to select from the larger array to generate the password.
+
+However, this was ultimately an exercise in utilizing vanilla Javascript and fundamental Javascript concepts.
+
 The live page can be found here: https://connietran-dev.github.io/password-generator/ 
 
 ---
