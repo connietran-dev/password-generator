@@ -6,7 +6,7 @@ The webpage will prompt you for your desired password length and then ask for yo
 
 If time permits, a future improvement would be a refactor of the code. I'd like to add the user's desired characters (symbols, numbers, etc.) to a larger array and use Math.random to select from the larger array to generate the password.
 
-However, this was ultimately an exercise in utilizing vanilla Javascript and fundamental Javascript concepts.
+This was ultimately an exercise in fundamental Javascript concepts and in utilizing vanilla Javascript. I've kept comments and console logging that help explain the function of each line of code and that explain my thought process as an educational tool.
 
 The live page can be found here: https://connietran-dev.github.io/password-generator/ 
 
